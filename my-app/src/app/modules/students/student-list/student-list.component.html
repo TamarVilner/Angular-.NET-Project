@@ -1,0 +1,38 @@
+<!-- <p>student-list works!</p> -->
+<div><input type="checkbox" #chb (change)="showStudentByActive(chb.checked)">show active students</div>
+<ul class="list-group">
+  <li class="list-group-item" aria-current="true" *ngFor="let s of students"
+    [ngClass]="{ 'list-group-item-secondary' :s.active && s.active<today, 'list-group-item-action list-group-item-success' :s.avg&&s.avg>90}">
+    <div class="row">
+      <div class="col-1">{{ s.id }}:{{ s.fName }} {{ s.lName }}</div>
+      <div class="col-3">{{ s.fon }}</div>
+      <div class="col-3">totalDaysAbsence: {{totalF(s.id||0)}}</div>
+      <div class="col-2">
+        <button class="btn btn-danger" (click)="dellStudentById(s.id||1)">dellStudent</button>
+      </div>
+      <div class="col-4">
+        <button class="btn btn-info" routerLink="/studentsDetails/{{s.id}}" (click)="upStudent(s)">updateStudent</button>
+      </div>
+      <div class="col-4">
+        <button class="btn btn-info" (click)="gpa(s.id||1)">show GPA after 3 second</button>
+      </div>
+      <div></div>
+    </div>
+  </li>
+</ul>
+<div *ngIf="avg">the GPA is:{{avg}}</div>
+<div class="col-4">
+  <button class="btn btn-primary" (click)="sendEmailF()">Sending emails to all active students</button>
+</div>
+<br>
+<div class="col-4">
+  <button class="btn btn-primary" (click)="sendEmailFByForm()">Sending emails to all active students by
+    pipe&map&from</button>
+</div>
+<br>
+<div class="col-4">
+  <button class="btn btn-primary" (click)="showNewStudentDetails()">addStudent</button>
+</div>
+
+<app-student-details-form-md [student]="selectedS" *ngIf="selectedS"
+  (onSaveNewStudent)="addStudent($event)"></app-student-details-form-md>

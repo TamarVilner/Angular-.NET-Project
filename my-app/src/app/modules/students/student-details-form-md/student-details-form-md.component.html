@@ -1,0 +1,116 @@
+<!-- <p>student-details-form-md works!</p> -->
+<div class="card" *ngIf="student; else noStudent">
+  <div class="card-body">
+    <form [formGroup]="studentForm">
+      Student details:
+
+      <div class="form-group">
+        <label for="fName">First Name:</label>
+        <input formControlName="fName" type="text" class="form-control" id="fName" name="fName">
+        <ng-container *ngIf="studentForm.controls['fName'].errors">
+          <div class="alert alert-danger" *ngIf="studentForm.controls['fName'].errors['required']">
+            This field is required
+          </div>
+          <div class="alert alert-warning" *ngIf="studentForm.controls['fName'].errors['minlength']">
+            This minLength must be 3 letters
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="form-group">
+        <label for="lName">Last Name:</label>
+        <input formControlName="lName" type="text" class="form-control" id="lName" name="lName">
+        <ng-container *ngIf="studentForm.controls['lName'].errors">
+          <div class="alert alert-warning" *ngIf="studentForm.controls['lName'].errors['minlength']">
+            This minLength must be 3 letters
+          </div>
+        </ng-container>
+      </div>
+
+      <div class="form-group">
+        <label for="adress">Email Address:</label>
+        <input placeholder="name@example.com" formControlName="adress" type="text" class="form-control" id="adress"
+          name="adress">
+        <ng-container *ngIf="studentForm.controls['adress'].errors">
+          <div class="alert alert-warning" *ngIf="studentForm.controls['adress'].errors['email']">This email must be
+            correct</div>
+        </ng-container>
+      </div>
+
+      <div class="form-group">
+        <label for="fon">Phone:</label>
+        <input formControlName="fon" type="tel" class="form-control" id="fon" name="fon">
+        <ng-container *ngIf="studentForm.controls['fon'].errors">
+          <div class="alert alert-warning" *ngIf="studentForm.controls['fon'].errors['minlength']">This minLength must
+            be 9 characters</div>
+          <div class="alert alert-warning" *ngIf="studentForm.controls['fon'].errors['maxlength']">This maxLength must
+            be not more than 10 characters</div>
+        </ng-container>
+      </div>
+
+      <div class="form-group">
+        <label for="id">ID:</label>
+        <input formControlName="id" type="number" class="form-control" id="id" name="id">
+        <div *ngIf="studentForm.controls['id'].errors&&studentForm.controls['id'].errors['required']">This field is
+          required</div>
+      </div>
+
+      <div class="form-group">
+        <label for="active">Active:</label>
+        <input type="date" formControlName="active" class="form-control" id="active" name="active">
+        <ng-container *ngIf="studentForm.controls['active'].errors">
+          <div class="alert alert-warning" *ngIf="studentForm.controls['active'].errors['required']">This field is
+            required</div>
+        </ng-container>
+      </div>
+
+      <div class="form-group">
+        <label for="educationPrograms">educationPrograms:</label>
+        <select class="form-control" formControlName="educationPrograms">
+          <option [value]="educationPrograms.Engineers">Engineers</option>
+          <option [value]="educationPrograms.Architecture">Architecture</option>
+          <option [value]="educationPrograms.Mathematics">Mathematics</option>
+          <option [value]="educationPrograms.Dance">Dance</option>
+          <option [value]="educationPrograms.Singing">Singing</option>
+        </select>
+      </div>
+
+      <div class="form-group">
+        <label for="classS">class</label>
+        <br>
+        <input type="radio" value="A" name="classS" formControlName="classS">A
+        <br>
+        <input type="radio" value="B" name="classS" formControlName="classS">B
+        <br>
+        <input type="radio" value="C" name="classS" formControlName="classS">C
+      </div>
+      <div class="alert alert-danger"><b>totalDaysAbsence: {{totalF()}}</b></div>
+      <div class="form-group">
+        <input class="form-control" type="number" placeholder="number of days of absence">
+        <br />
+        <label class="form-control">date of start days of absence</label>
+        <input class="form-control" type="date">
+      </div>
+
+      <div [ngSwitch]="studentForm.controls['classS'].value">
+        <div *ngSwitchCase="'A'">This days of learning will be completed in 365 days</div>
+        <div *ngSwitchCase="'B'">This days of learning will be completed in 200 days</div>
+        <div *ngSwitchCase="'C'">This days of learning will be completed in 10 days</div>
+      </div>
+
+      <div *ngIf="studentForm.controls['active'].value && isDateBeforeToday(studentForm.controls['active'].value)">
+        {{ studentForm.controls['active'].value | date: 'shortDate' }} the student is not active
+      </div>
+
+      <button [disabled]="!studentForm.valid" (click)="saveNewStudent()" class="btn btn-primary">Save</button>
+      <button [disabled]="!studentForm.valid" routerLink="/students"  (click)="saveNewStudentByNavigate()" class="btn btn-primary">Save by navigate</button>
+
+    </form>
+  </div>
+</div>
+
+<ng-template #noStudent>
+  <div class="card">
+    No student to display
+  </div>
+</ng-template>

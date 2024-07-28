@@ -1,0 +1,52 @@
+<!-- טפסים בסגנון TD שימוש [(ngModel)] -->
+
+<!-- <p>student-details-form-td works!</p>
+<div class="card" *ngIf="student else noStudent">
+    <div class="card-body">
+        <form>
+            Student details:
+            <div class="form-group">
+                <label for="fName">First Name:</label>
+                <input type="text" #studentName required minlength="3" #studentNameModel="ngModel" class="form-control"
+                    id="fName" [(ngModel)]="student.fName" name="fName">
+                <ng-container *ngIf="studentNameModel.errors && (studentNameModel.dirty || studentNameModel.touched)">
+                       <div class="alert alert-danger" *ngIf="studentNameModel.errors?.required">שדה חובה</div>//לשאול את גילי מה הבעיה פהההההההההה -->
+                    <!-- <div class="alert alert-danger" *ngIf="studentNameModel.errors">חייב להכיל לפחות 3 תווים
+                    </div>
+                </ng-container>
+    </div>
+    <div class="form-group">
+        <label for="lName">Last Name:</label>
+        <input type="text" class="form-control" id="lName" [(ngModel)]="student.lName" name="lName">
+    </div>
+    <div class="form-group">
+        <label for="adress">Address:</label>
+        <input type="text" class="form-control" id="adress" [(ngModel)]="student.adress" name="adress">
+    </div>
+    <div class="form-group">
+        <label for="fon">Phone:</label>
+        <input type="tel" class="form-control" id="fon" [(ngModel)]="student.fon" name="fon">
+    </div>
+    <div class="form-group">
+        <label for="id">ID:</label>
+        <input type="number" class="form-control" id="id" [(ngModel)]="student.id" name="id">
+    </div>
+    <div class="form-group">
+        <label for="active">Active:</label>
+        <input type="date" class="form-control" id="active" [(ngModel)]="student.active" name="active">
+    </div>
+
+    <div *ngIf="student.active && isDateBeforeToday(student.active)">
+        {{ student.active | date: 'shortDate' }} the student is not active
+    </div>
+    </form>
+</div>
+<button (click)="saveNewStudent()" class="btn btn-primary">Save</button>
+
+</div>
+
+<ng-template #noStudent>
+    <div class="card">
+        No student to display
+    </div>
+</ng-template> --> 

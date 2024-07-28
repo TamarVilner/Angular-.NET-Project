@@ -1,0 +1,47 @@
+<!-- <p>student-details works!</p> -->
+<div class="card" *ngIf="student else noStudent">
+  <div class="card-body">
+    <form>
+    Student details:
+    <div class="form-group">
+      <label for="fName">First Name:</label>
+      <input type="text" class="form-control" id="fName" [value]="student.fName" name="fName">
+    </div>
+    <div class="form-group">
+      <label for="lName">Last Name:</label>
+      <input type="text" class="form-control" id="lName" [value]="student.lName" name="lName">
+    </div>
+    <div class="form-group">
+      <label for="adress">Address:</label>
+      <input type="text" class="form-control" id="adress" [value]="student.adress" name="adress">
+    </div>
+    <div class="form-group">
+      <label for="fon">Phone:</label>
+      <input type="tel" class="form-control" id="fon" [value]="student.fon" name="fon">
+    </div>
+    <div class="form-group">
+      <label for="id">ID:</label>
+      <input type="number" class="form-control" id="id" [value]="student.id" name="id">
+    </div>
+    <div class="form-group">
+      <label for="active">Active:</label>
+      <input type="date" class="form-control" id="active" [value]="student.active" name="active">
+    </div>
+    <div class="form-group">
+      <label for="avg">average:</label>
+      <input type="range" min="0" max="100" class="form-control" id="avg" [value]="student.avg" name="avg">
+    </div>
+
+    <div *ngIf="student.active && isDateBeforeToday(student.active)">
+      {{ student.active | date: 'shortDate' }} the student is not active
+    </div>
+  </form>
+  </div>
+  <button (click)="saveNewStudent()" class="btn btn-primary">Save</button>
+</div>
+
+<ng-template #noStudent>
+  <div class="card">
+    No student to display
+  </div>
+</ng-template>
